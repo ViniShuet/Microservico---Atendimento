@@ -1,0 +1,16 @@
+-get
+http://localhost:3000
+
+-Post
+{
+	"nome" : "teste 5",
+	"idade" : 11
+}
+
+-Put (passar id na URL apos '/')
+http://localhost:3000/2
+
+{
+			"nome": "teste atualizando usuario3",
+			"idade": 123
+}
