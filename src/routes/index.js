@@ -111,4 +111,34 @@ router.put('/:id', (req, res, next) => {
         })
 })
 
+//Delete
+router.delete('/:id', (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id);
+
+        const userFind = users.findIndex(u => u.id == id);
+
+        // Se não encontrou o usuário
+        if (userFind === -1) {
+            return res.status(404).json({
+                sucess: false,
+                message: "Usuário não encontrado"
+            });
+        }
+
+        users.splice(userFind, 1);
+
+        res.status(200).json({
+            sucess: true,
+            message: "Usuário deletado com sucesso"
+        });
+    } catch (error) {
+        res.status(500).json({
+            sucess: false,
+            message: "Erro ao deletar o usuário",
+            error: error.message
+        });
+    }
+});
+
 module.exports = router;
