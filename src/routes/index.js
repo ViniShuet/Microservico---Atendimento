@@ -112,33 +112,41 @@ router.put('/:id', (req, res, next) => {
 })
 
 //Delete
-router.delete('/:id', (req, res, next) => {
-    try {
-        const id = parseInt(req.params.id);
-
-        const userFind = users.findIndex(u => u.id == id);
-
-        // Se não encontrou o usuário
-        if (userFind === -1) {
-            return res.status(404).json({
-                sucess: false,
-                message: "Usuário não encontrado"
-            });
+router.delete("/:id", (req, res, next) => {
+    
+  try{
+    const id = parseInt(req.params.id)
+    const userIndex = users.findIndex(u => u.id === id)
+    console.log(`index encontrado: ${userIndex}`)
+    if(userIndex === -1){
+      return res.status(404).json(
+        {
+          success: false, 
+          message: "Identificador não encontrado"
         }
-
-        users.splice(userFind, 1);
-
-        res.status(200).json({
-            sucess: true,
-            message: "Usuário deletado com sucesso"
-        });
-    } catch (error) {
-        res.status(500).json({
-            sucess: false,
-            message: "Erro ao deletar o usuário",
-            error: error.message
-        });
+      )
     }
-});
+    //remover da lista
+    const deleteUser = users[userIndex] 
+    console.log(`Remover usuário ${deleteUser}`)
+    users.splice(userIndex, 1) // removendo 
+
+    //Podemos usar o 204 (no content)
+    res.status(200).json({
+      success:true, 
+      message: 'Removido com sucesso'
+    })
+
+  }catch(error){
+    console.info(erro)
+    res.status(500).json(
+      {
+        success:false, 
+        message: "Erro interno ao deletar o usuário"
+      }
+    )
+  }
+
+});	
 
 module.exports = router;
