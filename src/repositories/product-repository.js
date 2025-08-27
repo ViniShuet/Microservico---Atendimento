@@ -8,7 +8,7 @@ class ProductRepository{
     }
 
     async findById(id){
-        return await Product.findById(id)
+        return await ProductRepository.findById(id)
     }
 
     //Criar

@@ -5,7 +5,7 @@ const app = express()
 const mongoose = require('mongoose')
 
 //Config a conexao
-mongoose.connect("mongodb://vinishuet:nja270105vj@localhost:27017/?authSource=admin")
+mongoose.connect("mongodb://seu_usuario:sua_senha@localhost:27017/?authSource=admin")
 .then(() => {
     console.log('Conectado')
 })
